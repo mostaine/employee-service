@@ -19,6 +19,14 @@ public class EmployeeService {
 
     }
 
+    public Employee findById(String idEmployee) {
+        return employeeRepository.findById(idEmployee).get();
+
+    }
+
+    public Employee insert(Employee e) {
+        return employeeRepository.save(e);
+    }
 
 
 }
