@@ -3,12 +3,14 @@ package com.example.employeeservice.controllers;
 import com.example.employeeservice.models.Employee;
 import com.example.employeeservice.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/employees")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -27,9 +29,15 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public List<Employee> insert( @RequestBody Employee employee ) {
-      return employeeService.findAll();
+    public Employee insert( @RequestBody Employee employee ) {
+      return employeeService.insert(employee);
 
+    }
+
+    @DeleteMapping("/{idEmployee}")
+    public void deleteById(@PathVariable String idEmployee ) {
+
+        employeeService.delete(idEmployee); ;
     }
 
 
