@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -32,9 +31,20 @@ public class EmployeeService {
         employeeRepository.deleteById(idEmployee);
     }
 
+    public void update(String idEmployee, Employee employee) {
+        if(idEmployee.equals(employee.getIdEmployee())){
+            if(employeeRepository.existsById(idEmployee)){
+                employeeRepository.save(employee);
+            }
+            else {
+                throw new RuntimeException("error: l'employee  n'existe pas");
 
+            }
+        }
+        else{
+            throw new RuntimeException("error: les donnes different");
+        }
 
-
-
+    }
 
 }
